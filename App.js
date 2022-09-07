@@ -1,20 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import * as React from 'react';
+import 'react-native-gesture-handler';
+import { View, Text } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createDrawerNavigator } from '@react-navigation/drawer';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+import RolagemDados from './screens/RolagemDados';
+import Iniciativa from './screens/Iniciativa';
+import Monstros from './screens/Monstros';
+
+function RolagemDadosScreen() {
+  return(
+  <RolagemDados></RolagemDados>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function IniciativaScreen() {
+  return(
+    <Iniciativa></Iniciativa>
+  );
+}
+
+function MonstrosScreen() {
+  return(
+    <Monstros></Monstros>
+  );
+}
+const Drawer = createDrawerNavigator();
+
+function MyDrawer() {
+  return (
+    <Drawer.Navigator initialRouteName='MonstrosScreem'>
+      <Drawer.Screen name="Rolagem Dados" component={RolagemDadosScreen} />
+      <Drawer.Screen name="Monstros" component={MonstrosScreen}/>
+      <Drawer.Screen name="Iniciativa" component={IniciativaScreen}/>
+    </Drawer.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <NavigationContainer>
+      <MyDrawer />
+    </NavigationContainer>
+  );
+}
